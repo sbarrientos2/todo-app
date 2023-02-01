@@ -12,6 +12,19 @@ for (const todo of savedTodos) {
   addTodoToPage(todo);
 }
 
+// Function to update progress bar
+function updateProgressBar() {
+  // Get progress bar element
+  const progressBar = document.getElementById("progress-bar")
+
+  // Get the number of total tasks and completed tasks
+  const totalTodos = todoList.children.length;
+  const completedTodos = todoList.querySelectorAll("input[type=checkbox]:checked").length; 
+
+  // Update the progress bar value
+  progressBar.value = (completedTodos / totalTodos) * 100;
+};
+
 // Listen for form submissions
 todoForm.addEventListener("submit", function(event) {
   // Prevent form from submitting
@@ -37,18 +50,6 @@ todoForm.addEventListener("submit", function(event) {
 
   // Update the progress bar
   updateProgressBar();
-  
-  function updateProgressBar() {
-    // Get progress bar element
-    const progressBar = document.getElementById("progress-bar")
-
-    // Get the number of total tasks and completed tasks
-    const totalTodos = todoList.children.length;
-    const completedTodos = todoList.querySelectorAll("input[type=checkbox]:checked").length; 
-
-    // Update the progress bar value
-    progressBar.value = (completedTodos / totalTodos) * 100;
-  };
 });
 
 function addTodoToPage(todo) {
@@ -110,18 +111,6 @@ function addTodoToPage(todo) {
 
   // Append the todo item to the list
   todoList.appendChild(todoItem);
-  
-  function updateProgressBar() {
-    // Get progress bar element
-    const progressBar = document.getElementById("progress-bar")
-
-    // Get the number of total tasks and completed tasks
-    const totalTodos = todoList.children.length;
-    const completedTodos = todoList.querySelectorAll("input[type=checkbox]:checked").length; 
-
-    // Update the progress bar value
-    progressBar.value = (completedTodos / totalTodos) * 100;
-  };
 }
 
 // Add a submit event listener to the form
@@ -192,18 +181,6 @@ todoForm.addEventListener("submit", function(event) {
 
   // Append the todo item to the list
   todoList.appendChild(todoItem);
-
-  function updateProgressBar() {
-    // Get progress bar element
-    const progressBar = document.getElementById("progress-bar")
-
-    // Get the number of total tasks and completed tasks
-    const totalTodos = todoList.children.length;
-    const completedTodos = todoList.querySelectorAll("input[type=checkbox]:checked").length; 
-
-    // Update the progress bar value
-    progressBar.value = (completedTodos / totalTodos) * 100;
-  };
 });
 
 // Event listener for the form submit event
