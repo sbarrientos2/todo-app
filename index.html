@@ -4,15 +4,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles-light.css">
+        <link rel="stylesheet" href="styles-dark.css">
         <meta charset="UTF-8">
         <title>Todo App</title>
     </head>
     <body>
+        <div class="d-flex justify-content-end">
+            <button id="toggle-mode" class="btn btn-light">
+              <i class="fas fa-lightbulb"></i>
+            </button>
+        </div>
+          
         <h1>Todo App!</h1>
         <h5>Keep all your todos organized in one place</h5>
-        <form id="todo-form">
+        <form>
             <input type="text" id="todo-input" placeholder="Add a new todo">
             <button type="submit">Add</button>
         </form>
