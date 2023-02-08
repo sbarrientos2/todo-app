@@ -2,9 +2,19 @@
 const todoInput = document.getElementById("todo-input");
 const todoList = document.getElementById("todo-list");
 
-// Get the button to change the theme of the website
-const toggleButton = document.querySelector('#toggle-mode');
-const stylesheetLinks = document.querySelectorAll('link[rel="stylesheet"]');
+const toggleButton = document.getElementById("toggle-theme");
+const lightThemeLink = document.getElementById("light-theme");
+const darkThemeLink = document.getElementById("dark-theme");
+
+toggleButton.addEventListener("click", function () {
+  if (lightThemeLink.disabled) {
+    lightThemeLink.disabled = false;
+    darkThemeLink.disabled = true;
+  } else {
+    lightThemeLink.disabled = true;
+    darkThemeLink.disabled = false;
+  }
+});
 
 // Function to update the progress bar
 function updateProgressBar() {

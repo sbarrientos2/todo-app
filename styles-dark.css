@@ -1,0 +1,83 @@
+body {
+    background-color: black;
+}
+
+#toggle-mode {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+h1, h5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+h1 {
+    margin-left: 10px;
+    font-family:"Montserrat", sans-serif;
+    font-size: 5rem;
+    margin: ce;
+}
+
+h5 {
+    margin-left: 10px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+}
+
+li {
+    color: white;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#todo-input {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+#todo-list {
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#todo-item {
+    width: 300px;
+}
+
+button {
+    margin-left: 5px;
+    margin-top: 5px;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: rgb(153, 25, 208);
+}
+
+input {
+    margin-right: 5px;
+    font-family: "Montserrat", sans-serif;
+}
+
+#progress-bar {
+    text-align: center;
+    height: 2rem;
+    width: 100%;
+}
