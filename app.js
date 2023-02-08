@@ -54,6 +54,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
     // Add a click event listener to the delete button
     deleteButton.addEventListener("click", function() {
         todoList.removeChild(todoItem);
+        updateProgressBar();
     });
 
     // Create an edit button for the todo
@@ -75,6 +76,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
             todoItem.prepend(checkbox);
             todoItem.appendChild(deleteButton);
             todoItem.appendChild(editButton);
+            updateProgressBar();
         }
     });
 
