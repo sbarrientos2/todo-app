@@ -2,9 +2,24 @@ body {
     background-color: black;
 }
 
-#toggle-mode {
-    margin-right: 10px;
-    margin-top: 10px;
+#toggle-theme {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #636363;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#toggle-theme:hover {
+    background-color: #b1b1b1;
+}
+  
+.container {
+    position: relative;
 }
 
 h1, h5 {
