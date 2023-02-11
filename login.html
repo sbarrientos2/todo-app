@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="./styles-login.css"
+        <!-- Load Bootstrap styles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-iX9+Z5q5Yzgd5+loGwyJyS5W6Mg0FK/aRvkLdG00Z9hM16zC37D59Qfi6Fw0bJbrWpHa+o/lIZEnuxh1/xv8EA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center">Login</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/login">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                    <p class="text-center mt-3">Don't have an account? <a href="/register">Register</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Load Bootstrap scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-m/VQ7zmjv6spWx7V9Xsjg1li/HO1v6vnCJ6VZk6rZmTWG1khokBxWAPJ9d4jr4e5k5vqsH+2IQ97Jj/Yw5gOhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+</html>

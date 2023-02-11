@@ -6,6 +6,7 @@ const toggleButton = document.getElementById("toggle-theme");
 const lightThemeLink = document.getElementById("light-theme");
 const darkThemeLink = document.getElementById("dark-theme");
 
+// Change the theme of the website
 toggleButton.addEventListener("click", function () {
   if (lightThemeLink.disabled) {
     lightThemeLink.disabled = false;
