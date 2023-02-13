@@ -1,13 +1,23 @@
 // Get the input element and todo list element
 const todoInput = document.getElementById("todo-input");
 const todoList = document.getElementById("todo-list");
-
 const toggleButton = document.getElementById("toggle-theme");
 const lightThemeLink = document.getElementById("light-theme");
 const darkThemeLink = document.getElementById("dark-theme");
+const progressBar = document.getElementById("progress-bar");
 
 // Change the theme of the website
 toggleButton.addEventListener("click", function () {
+  toggleTheme();
+});
+
+// Add a submit event listener to the form
+document.querySelector("form").addEventListener("submit", function(event) {
+  event.preventDefault();
+  addTodo();
+});
+
+function toggleTheme() {
   if (lightThemeLink.disabled) {
     lightThemeLink.disabled = false;
     darkThemeLink.disabled = true;
@@ -15,112 +25,79 @@ toggleButton.addEventListener("click", function () {
     lightThemeLink.disabled = true;
     darkThemeLink.disabled = false;
   }
-});
+}
 
-// Function to update the progress bar
 function updateProgressBar() {
-  // Get progress bar element
-  const progressBar = document.getElementById("progress-bar")
-
-  // Get the number of total tasks and completed tasks
   const totalTodos = todoList.children.length;
   const completedTodos = todoList.querySelectorAll("input[type=checkbox]:checked").length; 
-
-  // Update the progress bar value
   progressBar.value = (completedTodos / totalTodos) * 100;
-};
+}
 
-// Add a submit event listener to the form
-document.querySelector("form").addEventListener("submit", function(event) {
-  // Prevent the form from submitting 
-  event.preventDefault();
-
-  // Get the todo input value
-  const todo = todoInput.value;
-
-  // Check that the todo input is not empty
-  if (todo.trim() === "") {
+function addTodo() {
+  const todo = todoInput.value.trim();
+  if (todo === "") {
     return;
   }
+  const todoItem = createTodoItem(todo);
+  todoList.appendChild(todoItem);
+  updateProgressBar();
+  todoInput.value = "";
+}
 
-  // Create a new list item from the todo
+function createTodoItem(todo) {
   const todoItem = document.createElement("li");
   todoItem.textContent = todo;
-
-  // Create a checkbox for the todo element
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   todoItem.prepend(checkbox);
-
-  // Add a change event listener to the checkbox
+  const deleteButton = createDeleteButton();
+  const editButton = createEditButton(todo, todoItem, checkbox, deleteButton);
   checkbox.addEventListener("change", function() {
-  // Update the progress bar value
-  updateProgressBar();
-});
+    updateProgressBar();
+  });
+  deleteButton.addEventListener("click", function() {
+    todoList.removeChild(todoItem);
+    updateProgressBar();
+  });
+  todoItem.appendChild(deleteButton);
+  todoItem.appendChild(editButton);
+  return todoItem;
+}
 
-// Create a delete button for the todos
-const deleteButton = document.createElement("button");
-deleteButton.textContent = "Delete";
-deleteButton.title = 'Delete Todo'
+function createDeleteButton() {
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.title = 'Delete Todo';
+  return deleteButton;
+}
 
-// Add a click event listener to the delete button
-deleteButton.addEventListener("click", function() {
-  todoList.removeChild(todoItem);
-  updateProgressBar();
-});
+function createEditButton(todo, todoItem, checkbox, deleteButton) {
+  const todoEditInput = document.createElement("input");
+  const editButton = document.createElement("button");
+  editButton.textContent = "Edit";
+  editButton.title = 'Edit Todo';
+  editButton.addEventListener("click", function() {
+    replaceTodoItemWithInput(todoItem, todoEditInput, todo, checkbox, deleteButton, editButton);
+  });
+  todoEditInput.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+      replaceInputWithTodoItem(todoItem, todoEditInput, todo, checkbox, deleteButton, editButton);
+      updateProgressBar();
+    }
+  });
+  return editButton;
+}
 
-// Create an input field for editing the todo
-const todoEditInput = document.createElement("input");
-
-// Create an edit button for the todo
-const editButton = document.createElement("button");
-editButton.textContent = "Edit";
-editButton.title = 'Edit Todo'
-
-// Add a click event listener to the edit button
-editButton.addEventListener("click", function() {
-  // Replace the text content of the task with an input field
+function replaceTodoItemWithInput(todoItem, todoEditInput, todo, checkbox, deleteButton, editButton) {
   todoEditInput.value = todo;
   todoItem.textContent = "";
   todoItem.appendChild(todoEditInput);
   todoEditInput.focus();
-});
+}
 
-todoEditInput.addEventListener("keyup", function(event) {
-  if (event.key === "Enter") {
-    todoItem.textContent = todoEditInput.value;
-    todoItem.prepend(checkbox);
-    todoItem.appendChild(deleteButton);
-    todoItem.appendChild(editButton);
-    updateProgressBar();
-  }
-});
-
-// Append the delete button to the task item
-todoItem.appendChild(deleteButton);
-
-// Append the edit button to the task item
-todoItem.appendChild(editButton);
-
-// Append the task item to the task list
-todoList.appendChild(todoItem);
-
-// Call the updateProgressBar function
-updateProgressBar();
-
-// Clear the task input value
-todoInput.value = "";
-});
-
-// Function to update the progress bar
-function updateProgressBar() {
-  // Get progress bar element
-  const progressBar = document.getElementById("progress-bar");
-  
-  // Get the number of total tasks and completed tasks
-  const totalTodos = todoList.children.length;
-  const completedTodos = todoList.querySelectorAll("input[type=checkbox]:checked").length;
-  
-  // Update the progress bar value
-  progressBar.value = (completedTodos / totalTodos) * 100;
-};
+function replaceInputWithTodoItem(todoItem, todoEditInput, todo, checkbox, deleteButton, editButton) {
+  todoItem.textContent = todoEditInput.value;
+  todoItem.prepend(checkbox);
+  todoItem.appendChild(deleteButton);
+  todoItem.appendChild(editButton);
+}
