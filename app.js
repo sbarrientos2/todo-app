@@ -61,6 +61,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
 // Create a delete button for the todos
 const deleteButton = document.createElement("button");
 deleteButton.textContent = "Delete";
+deleteButton.title = 'Delete Todo'
 
 // Add a click event listener to the delete button
 deleteButton.addEventListener("click", function() {
@@ -74,6 +75,7 @@ const todoEditInput = document.createElement("input");
 // Create an edit button for the todo
 const editButton = document.createElement("button");
 editButton.textContent = "Edit";
+editButton.title = 'Edit Todo'
 
 // Add a click event listener to the edit button
 editButton.addEventListener("click", function() {

@@ -2,15 +2,19 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Tourney:wght@200&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <link rel="stylesheet" href="./styles-light.css" id="light-theme">
         <link rel="stylesheet" href="./styles-dark.css" id="dark-theme">
         <meta charset="UTF-8">
         <title>Todo App</title>
+        
     </head>
     <body>
-        <button class="d-flex justify-content-end" id="toggle-theme">
+        <button title="Change Theme" class="d-flex justify-content-end" id="toggle-theme">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightning-fill" viewBox="0 0 16 16">
               <path d="M4.86 11.054A1 1 0 0 0 6 12h3l-1 3h3a1 1 0 0 0 .884-.47A1 1 0 0 0 12 14H9l1-3H6a1 1 0 0 0-.14.054L2 8h2l-1-3h3a1 1 0 0 0 .99-.858L8.268.858A1 1 0 0 0 7.293 0H4.707a1 1 0 0 0-.976.858L3 5h2l-1 3z"/>
             </svg>
@@ -20,7 +24,7 @@
         <h5>Keep all your todos organized in one place</h5>
         <form>
             <input type="text" id="todo-input" placeholder="Add a new todo">
-            <button type="submit">Add</button>
+            <button title="Add Todo" type="submit">Add</button>
         </form>
         <ul id="todo-list">
             <!-- Todos will be dynamically added here -->
