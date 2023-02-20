@@ -49,11 +49,11 @@ function addTodo() {
 
   // Save the new todo to local storage
   const todos = JSON.parse(localStorage.getItem('todos')) || [];
-  todos.push(todo);
+  todos.push({todo, completed: false});
   localStorage.setItem('todos', JSON.stringify(todos));
 
   // Create new todo item
-  const todoItem = createTodoItem(todo);
+  const todoItem = createTodoItem({todo, completed: false});
   // Add new item to the list
   todoList.appendChild(todoItem);
   // Update progress bar's value
@@ -62,26 +62,36 @@ function addTodo() {
 }
 
 // Create new todo item using const todo created in the addTodo function
-function createTodoItem(todo) {
+function createTodoItem({todo, completed}) {
   // Create new todo item or li item for the ul
   const todoItem = document.createElement("li");
-
-  // Give the new item a value
-  todoItem.textContent = todo;
 
   // Create the new item with a clear checkbox
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.checked = completed;
   // Put the checkbox on the left of the todo item
   todoItem.prepend(checkbox);
 
+  // Give the new item a value
+  const todoLabel = document.createElement('label');
+  todoLabel.textContent = todo;
+  todoItem.appendChild(todoLabel);
+
   // Create delete and edit buttons for the new todo item
   const deleteButton = createDeleteButton();
-  const editButton = createEditButton(todo, todoItem, checkbox, deleteButton);
+  const editButton = createEditButton({todo, completed, todoItem, checkbox, deleteButton});
 
   // Add an event listener to the checkbox that updates the progress bar when changed
   checkbox.addEventListener("change", function() {
     updateProgressBar();
+    // Update the completed status of the todo in local storage
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const index = todos.findIndex((item) => item.todo === todo);
+    if (index > -1) {
+      todos[index].completed = checkbox.checked;
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
   });
 
   // Add event listener to the delete button so it removes the current item and updates progress bar
@@ -91,10 +101,10 @@ function createTodoItem(todo) {
 
     // Remove the deleted todo from local storage
     const todos = JSON.parse(localStorage.getItem("todos")) || [];
-    const index = todos.indexOf(todo);
+    const index = todos.findIndex((item) => item.todo === todo);
     if (index > -1) {
       todos.splice(index, 1);
-      localStorage.setItem('todos', JSON.stringify(todos));
+      localStorage.setItem("todos", JSON.stringify(todos));
     }
   });
 
@@ -116,7 +126,7 @@ updateProgressBar();
 
 // Function that creates a new delete button
 function createDeleteButton() {
-  
+
   // Create new button
   const deleteButton = document.createElement("button");
 
@@ -128,7 +138,7 @@ function createDeleteButton() {
 }
 
 // Function that creates a new edit button
-function createEditButton(todo, todoItem, checkbox, deleteButton) {
+function createEditButton({todo, completed, todoItem, checkbox, deleteButton}) {
   // Create the input and button elements. To use them
   // Text input field that I'll use to edit the todo
   const todoEditInput = document.createElement("input");
@@ -171,13 +181,12 @@ function replaceInputWithTodoItem(todoItem, todoEditInput, checkbox, deleteButto
   todoItem.prepend(checkbox);
   todoItem.appendChild(deleteButton);
   todoItem.appendChild(editButton);
-  
+
   // Update the edited todo in local storage
   const todos = JSON.parse(localStorage.getItem('todos')) || [];
-  const index = todos.indexOf(todo);
+  const index = todos.findIndex((item) => item.todo === todo);
   if (index > -1) {
-    todos[index] = newTodo;
+    todos[index].todo = newTodo;
     localStorage.setItem('todos', JSON.stringify(todos));
   }
 }
-
