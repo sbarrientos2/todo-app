@@ -145,7 +145,7 @@ function createEditButton(todo, todoItem, checkbox, deleteButton) {
   function handleInputKeyUp(event) {
     if (event.key === "Enter") {
       const newTodo = todoEditInput.value;
-      replaceInputWithTodoItem(todoItem, todoEditInput, checkbox, deleteButton, editButton);
+      replaceInputWithTodoItem(todoItem, todoEditInput, checkbox, deleteButton, editButton, todo);
       updateProgressBar();
       todo = newTodo; // Update the todo argument with the new value
     }
@@ -165,10 +165,19 @@ function replaceTodoItemWithInput(todoItem, todoEditInput, todo, checkbox, delet
   todoEditInput.focus();
 }
 
-function replaceInputWithTodoItem(todoItem, todoEditInput, checkbox, deleteButton, editButton) {
+function replaceInputWithTodoItem(todoItem, todoEditInput, checkbox, deleteButton, editButton, todo) {
   const newTodo = todoEditInput.value;
   todoItem.textContent = newTodo;
   todoItem.prepend(checkbox);
   todoItem.appendChild(deleteButton);
   todoItem.appendChild(editButton);
+  
+  // Update the edited todo in local storage
+  const todos = JSON.parse(localStorage.getItem('todos')) || [];
+  const index = todos.indexOf(todo);
+  if (index > -1) {
+    todos[index] = newTodo;
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
 }
+
