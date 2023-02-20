@@ -69,6 +69,7 @@ function createTodoItem({todo, completed}) {
   // Create the new item with a clear checkbox
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.id = 'todo-checkbox'
   checkbox.checked = completed;
   // Put the checkbox on the left of the todo item
   todoItem.prepend(checkbox);
@@ -133,6 +134,7 @@ function createDeleteButton() {
   // Give the button text with textContent and title
   deleteButton.textContent = "Delete";
   deleteButton.title = 'Delete Todo';
+  deleteButton.id = 'delete-button';
 
   return deleteButton;
 }
@@ -147,6 +149,7 @@ function createEditButton({todo, completed, todoItem, checkbox, deleteButton}) {
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
   editButton.title = 'Edit Todo';
+  editButton.id = 'edit-button';
 
   function handleEditClick() {
     replaceTodoItemWithInput(todoItem, todoEditInput, todo, checkbox, deleteButton, editButton);
