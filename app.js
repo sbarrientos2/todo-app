@@ -46,6 +46,12 @@ function addTodo() {
   if (todo === "") {
     return;
   }
+
+  // Save the new todo to local storage
+  const todos = JSON.parse(localStorage.getItem('todos')) || [];
+  todos.push(todo);
+  localStorage.setItem('todos', JSON.stringify(todos));
+
   // Create new todo item
   const todoItem = createTodoItem(todo);
   // Add new item to the list
@@ -82,6 +88,14 @@ function createTodoItem(todo) {
   deleteButton.addEventListener("click", function() {
     todoList.removeChild(todoItem);
     updateProgressBar();
+
+    // Remove the deleted todo from local storage
+    const todos = JSON.parse(localStorage.getItem("todos")) || [];
+    const index = todos.indexOf(todo);
+    if (index > -1) {
+      todos.splice(index, 1);
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
   });
 
   // Add the delete and edit buttons on the right of the todo item
@@ -89,6 +103,16 @@ function createTodoItem(todo) {
   todoItem.appendChild(editButton);
   return todoItem;
 }
+
+// Retrieve saved todos on page load
+const todos = JSON.parse(localStorage.getItem("todos")) || [];
+todos.forEach(function(todo) {
+  const todoItem = createTodoItem(todo);
+  todoList.appendChild(todoItem);
+});
+
+// Update progress bar's value on page load
+updateProgressBar();
 
 // Function that creates a new delete button
 function createDeleteButton() {
