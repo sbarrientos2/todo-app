@@ -15,12 +15,6 @@ toggleButton.addEventListener("click", function () {
   toggleTheme();
 });
 
-// Add a submit event listener to the form
-document.querySelector("form").addEventListener("submit", function(event) {
-  event.preventDefault();
-  addTodo();
-});
-
 // Function to change the theme of the website form light to dark 
 function toggleTheme() {
   if (lightThemeLink.disabled) {
@@ -31,6 +25,12 @@ function toggleTheme() {
     darkThemeLink.disabled = false;
   }
 }
+
+// Add a submit event listener to the form
+document.querySelector("form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent web app from reloading
+  addTodo();
+});
 
 // Update progress bar's value
 function updateProgressBar() {
